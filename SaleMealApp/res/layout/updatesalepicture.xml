@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteBg"
+    android:orientation="vertical" >
+     <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="55dip"
+	            android:background="@color/frame">
+       <TextView
+                android:id="@+id/updateSalePictureTitle"
+                android:text="@string/updateSalePictureTitle"
+                android:background="@color/frame"
+                android:layout_width="fill_parent"
+                android:layout_height="55dip"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/titleText"
+                android:textSize="20sp"/>
+             <ImageButton
+                android:id="@+id/updateSalePictureReturnButton"
+                android:src="@drawable/pre_btn"
+                android:background="@null"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dip"
+                android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+    
+    <ImageView 
+        android:id="@+id/updateSalePicturePreview"
+        android:src="@drawable/logo"
+        android:layout_marginTop="50dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dip"
+        android:layout_height="150dip"
+        android:background="@null"
+        android:contentDescription="图像"
+        />
+    
+    <Button
+            android:id="@+id/scanPicture"
+            android:layout_width="fill_parent"
+            android:layout_height="55dip"
+            android:layout_marginTop="50dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginBottom="1dp"
+            android:text="@string/openGallery"
+            android:textSize="20sp"
+            android:textColor="@color/btnTextColor"
+            android:padding="5dip"
+            android:background="@color/buttonColor"
+            />
+        <Button
+            android:id="@+id/saveUpdatePictureButton"
+            android:layout_width="fill_parent"
+            android:layout_height="55dip"
+            android:layout_marginTop="25dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginBottom="1dp"
+            android:text="@string/saveChange"
+            android:textSize="20sp"
+            android:textColor="@color/btnTextColor"
+            android:padding="5dip"
+            android:background="@color/buttonColor"
+            android:visibility="gone"
+            />
+
+</LinearLayout>

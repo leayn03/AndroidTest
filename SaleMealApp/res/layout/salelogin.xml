@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/whiteBg"
+                android:orientation="vertical" >
+    <Button
+            android:id="@+id/loginTop"
+            android:layout_width="fill_parent"
+            android:layout_height="55dip"
+            android:background="@color/frame"
+            android:text="@string/saleLogin"
+            android:textColor="@color/btnTextColor"
+            android:textSize="20sp"
+            android:enabled="false"
+            />
+    <EditText
+            android:hint="@string/inputThePhone"
+            android:background="@color/editBg"
+            android:id="@+id/loginPhone"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/loginTop"
+            android:layout_marginTop="25dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginBottom="1dip"
+            android:textSize="15sp"
+            android:maxLength="11"
+            android:paddingLeft="20dp"
+            android:inputType="phone"
+            android:singleLine="true"
+            />
+    <EditText
+            android:hint="@string/inputThePassword"
+            android:background="@color/editBg"
+            android:id="@+id/loginPasswd"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/loginPhone"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:textSize="15sp"
+            android:password="true"
+            android:paddingLeft="20dp"
+            android:inputType="text"
+            android:singleLine="true"
+            />
+
+    <Button
+            android:id="@+id/loginButton"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:layout_below="@id/loginPasswd"
+            android:layout_marginTop="25dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:text="@string/saleLogin"
+            android:textColor="@color/btnTextColor"
+            android:textSize="20sp"
+            android:padding="5dip"
+            android:background="@color/buttonColor"
+            />
+    <TextView
+            android:id="@+id/registerGo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="190dp"
+            android:text="@string/goToRegister"
+            android:textSize="15sp"
+            android:textColor="@color/linkText"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/loginButton"
+
+            />
+    
+
+</RelativeLayout>

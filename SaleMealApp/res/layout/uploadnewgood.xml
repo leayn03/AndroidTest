@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/whiteBg"
+                android:orientation="vertical" >
+
+           <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="55dip"
+	            android:background="@color/frame">
+
+	        <TextView
+	                android:id="@+id/uploadNewGoodTitle"
+	                android:text="@string/uploadNewGoodTop"
+	                android:background="@color/frame"
+	                android:layout_width="fill_parent"
+	                android:layout_height="55dip"
+	                android:layout_centerVertical="true"
+	                android:gravity="center_vertical|center_horizontal"
+	                android:layout_marginTop="25dp"
+	                android:textColor="@color/titleText"
+	                android:textSize="20sp"/>
+	        <ImageButton
+	                android:id="@+id/uploadNewGoodReturnButton"
+	                android:src="@drawable/pre_btn"
+	                android:background="@null"
+	                android:layout_width="40dp"
+	                android:layout_height="40dp"
+	                android:layout_marginLeft="10dip"
+	                android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/inputTheGoodName"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="1dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_marginTop="65dip"
+        android:background="@color/editBg"
+        android:hint="@string/inputTheGoodName"
+        android:maxLength="11"
+        android:paddingLeft="20dp"
+        android:singleLine="true"
+        android:textSize="15sp" />
+
+    <EditText
+            android:hint="@string/inputTheGoodPrice"
+            android:background="@color/editBg"
+            android:id="@+id/inputTheGoodPrice"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/inputTheGoodName"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginBottom="1dip"
+            android:textSize="15sp"
+            android:paddingLeft="20dp"
+            android:numeric="decimal"
+            android:singleLine="true"
+            />
+        <EditText
+            android:hint="@string/inputTheGoodSale"
+            android:background="@color/editBg"
+            android:id="@+id/inputTheGoodSale"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/inputTheGoodPrice"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:textSize="15sp"
+            android:paddingLeft="20dp"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            />
+
+            <ImageView
+                android:id="@+id/uploadNewGoodPicture"
+                android:layout_width="200dip"
+                android:layout_height="200dip"
+                android:layout_below="@id/inputTheGoodSale"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dip"
+                android:background="@null"
+                android:contentDescription="图像"
+                android:src="@drawable/defaultgood" />
+
+<LinearLayout 
+    
+            android:id="@+id/linearLayoutNew"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:background="@color/whiteBg"
+		    android:layout_below="@id/uploadNewGoodPicture"
+		    android:orientation="horizontal" >
+    <Button
+            android:id="@+id/openGallery"
+            android:layout_width="100dip"
+            android:layout_height="40dip"
+            android:layout_marginTop="30dip"
+            android:layout_marginLeft="40dip"
+            android:layout_marginRight="15dip"
+            android:text="@string/openGallery"
+            android:textColor="@color/btnTextColor"
+            android:textSize="20sp"
+            android:padding="5dip"
+            android:background="@color/buttonColor"
+            />
+    <Button
+            android:id="@+id/saveNewGood"
+            android:layout_width="100dip"
+            android:layout_height="40dip"
+            android:layout_marginTop="30dip"
+            android:layout_marginLeft="60dip"
+            android:layout_marginRight="15dip"
+            android:text="@string/saveNewGood"
+            android:textColor="@color/btnTextColor"
+            android:textSize="20sp"
+            android:padding="5dip"
+            android:background="@color/buttonColor"
+            />
+
+   </LinearLayout>
+    
+
+</RelativeLayout>

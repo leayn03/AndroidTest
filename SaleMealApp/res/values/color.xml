@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+    <color name="whiteBg">#FFFFFF</color>
+    <color name="titleText">#FFFFFF</color>
+    <color name="frame">#FF8500</color> 
+     <color name="buttonColor">#FF8500</color>
+     <color name="btnTextColor">#FFFFFF</color>
+     <color name="greyNum">#040404</color>
+     <color name="editBg">#EEEEEC</color>
+     <color name="linkText">#3993CF</color>
+     <color name="viewButton">#EEEEEC</color>
+    
+    
+    
+    </resources>
