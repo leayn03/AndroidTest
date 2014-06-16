@@ -324,11 +324,11 @@ private boolean isRightPrice(String price)//数字正确输入
 		char c = price.charAt(i);
 		if(c=='.')
 		{
-			countDot=price.length()-i+1;
+			countDot=price.length()-i-1;
 		}
 	}
 	
-	if(count>1 && countDot>2)
+	if(count>1 || countDot>2)
 	{
 		return isRight;
 	}

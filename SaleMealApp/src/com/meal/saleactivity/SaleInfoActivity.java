@@ -10,6 +10,7 @@ import com.meal.activity.ipml.AsynThreadImpl;
 import com.meal.activity.ipml.UIThreadImpl;
 import com.meal.bean.Global;
 import com.meal.bean.Seller;
+import com.meal.dialog.MyProgressDialog;
 import com.meal.saleglobal.SaleGlobal;
 import com.meal.util.DialogUtil;
 import com.meal.util.SysUtil;
@@ -43,11 +44,13 @@ public class SaleInfoActivity extends BaseActivity{
 	Button orderListButton;
 	ImageButton mySetting;
 	Boolean switchState;
+	Bitmap bitmap;
+	ImageView imageSale;
 	
 
     private SellerManageAction sellerManage=SellerManageAction.getInstance();  //	初始化实例
     
-
+	private MyProgressDialog loginProgressDialog;   //progressbar 1
 	
 	
 	@Override
@@ -56,6 +59,16 @@ public class SaleInfoActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.saleinfo);
+		
+		//获取商户的图片
+		imageSale=(ImageView)findViewById(R.id.saleImage);		
+		//获取商户信息，名称和ID，再从数据库中获取并显示
+		TextView textView1=(TextView)findViewById(R.id.salesInfo);
+		//获取商户信息，地址和电话，再从数据库中获取并显示
+		TextView textView2=(TextView)findViewById(R.id.salesAddress);
+		//读取显示
+		loginProgressDialog = MyProgressDialog.createDialog(this);   //progressbar 2
+		pictureEvent();
 		if(SaleGlobal.seller!=null)
 		{
 			switchState=SaleGlobal.seller.getOrderFunctionSwitch();//获取商户接单状态
@@ -64,28 +77,24 @@ public class SaleInfoActivity extends BaseActivity{
 		{
 			switchState=false;
 		}
-		//获取商户的图片
-		ImageView imageSale=(ImageView)findViewById(R.id.saleImage);		
-		//获取商户信息，名称和ID，再从数据库中获取并显示
-		TextView textView1=(TextView)findViewById(R.id.salesInfo);
-		//获取商户信息，地址和电话，再从数据库中获取并显示
-		TextView textView2=(TextView)findViewById(R.id.salesAddress);
-		//读取显示
+
 		
-		String name = null, address = null, phone =null , logo=null;
-		Bitmap bm=null;
+		String name = null, address = null, phone =null ;
 	
 	    if(SaleGlobal.seller!=null)
 	    {
-	    	name=SaleGlobal.seller.getName();
+	    	loginProgressDialog.show();           //progressbar3
+	    	name=SaleGlobal.seller.getDescription();
 	    	address=SaleGlobal.seller.getAddress();
 	        phone=SaleGlobal.seller.getPhone();
-//	        logo=SaleGlobal.seller.getLogo();
-//	        bm= sellerManage.getLogo(logo);
 	        
-//	        imageSale.setImageBitmap(bm);
+	        
+	        imageSale.setImageBitmap(bitmap);
+	        
 	        textView1.setText(name);
 	        textView2.setText(address+"  "+phone);
+	        
+	        loginProgressDialog.dismiss();  //progressbar 4
 	  		
 	    }
 	    else 
@@ -183,6 +192,45 @@ public class SaleInfoActivity extends BaseActivity{
 		
 	}
 
+	private void pictureEvent(){
+		     loginProgressDialog.show();           //progressbar3
+		     initialPicture();
+		     startAsynThread("getSalePicture");
+	}
+	
+	
+	private void initialPicture()
+	{
+		setUIRefreshConfig(new UIThreadImpl() {
+			
+			@Override
+			public void refresh(Message msg) {
+				// TODO Auto-generated method stub
+				imageSale.setImageBitmap(bitmap);
+			}
+		});
+		
+		setAsynThreadConfig("getSalePicture", true, new AsynThreadImpl() {
+
+			@Override
+			public Message excute() {
+				// TODO Auto-generated method stub
+				Message msg = Message.obtain();
+				
+
+                String saleLogo = SaleGlobal.seller.getLogo();
+				bitmap = sellerManage.getLogo(saleLogo);
+
+				finishAsynThread("getSalePicture");
+
+				return msg;
+			}
+
+		});
+		
+	}	
+	
+	
 	private void openEventListener(){
 		   
 	    addClickEventListener(R.id.acceptButton, new View.OnClickListener() {
@@ -312,41 +360,5 @@ public class SaleInfoActivity extends BaseActivity{
 		}
 } 	
 	
-//	//覆写onKeyDown函数，监听返回键  双击退出到登陆页面
-//	@Override
-//	public boolean onKeyDown(int keyCode, KeyEvent event) {
-//		// TODO Auto-generated method stub
-//	    if(keyCode == KeyEvent.KEYCODE_BACK)  
-//	       {    
-//	           exitBy2Click();      //调用双击退出函数  
-//	       }  
-//	    return false; 
-//	}
-//	/**
-//	 * 双击退出函数
-////	 */
-//	private static Boolean isExit = false;
-//
-//	private void exitBy2Click() {
-//		Timer tExit = null;
-//		if (isExit == false) {
-//			isExit = true; // 准备退出
-//			Toast.makeText(this, "再按一次退出账户", Toast.LENGTH_SHORT).show();
-//			tExit = new Timer();
-//			tExit.schedule(new TimerTask() {
-//				@Override
-//				public void run() {
-//					isExit = false; // 取消退出
-//				}
-//			}, 2000); // 如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务
-//
-//		} else {
-//			finish();
-//			System.exit(0);
-//		}
-//	}
-//	
 
-	
-	
 }

@@ -3,6 +3,7 @@ package com.meal.util;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.security.MessageDigest;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.TimeZone;
@@ -27,7 +28,7 @@ public class SysUtil {
 	public static final int CMWAP = 2;
 	public static final int WIFI = 3;
 
-	private static String key = "AsDfG2!4^8(hMbVh(j&h%g#g@fDgNbZgF^QdSdQfGhJ:>;)-+-*hGjGh&6%4#5&8hGCXZd!s@d.hJhGjhjd*74387826734273fdska934fdsja8374836fhdsja736437hfdjsa6734aSAjfdkaa12345";
+	private static String key = "1q2w3e4r5t6y7u8i9o0p)P(O*I&U^Y%T$R#E@W!Q";
 
 	/**
 	 * @return
@@ -189,51 +190,54 @@ public class SysUtil {
 
 	}
 
+
 	/**
-	 * @param source
+	 * @param _string
 	 * @return
 	 */
-	public static String getMD5(String string) {
-
-		byte[] source = (string + key).getBytes();
-
-		String s = null;
-
-		char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-				'a', 'b', 'c', 'd', 'e', 'f' };
-
+	public static String getMD5(String _string) {
+		
+		String inStr = new String(key + _string);
+		
+		MessageDigest md5 = null;
+		
 		try {
-
-			java.security.MessageDigest md = java.security.MessageDigest
-					.getInstance("MD5");
-
-			md.update(source);
-
-			byte tmp[] = md.digest();
-
-			char str[] = new char[16 * 2];
-
-			int k = 0;
-
-			for (int i = 0; i < 16; i++) {
-
-				byte byte0 = tmp[i];
-
-				str[k++] = hexDigits[byte0 >>> 4 & 0xf];
-
-				str[k++] = hexDigits[byte0 & 0xf];
-
-			}
-
-			s = new String(str);
-
+			
+			md5 = MessageDigest.getInstance("MD5");
+			
 		} catch (Exception e) {
-
+			
 			e.printStackTrace();
-
+			
+			return "";
+			
 		}
+		
+		char[] charArray = inStr.toCharArray();
+		
+		byte[] byteArray = new byte[charArray.length];
 
-		return s;
+		for (int i = 0; i < charArray.length; i++)
+			
+			byteArray[i] = (byte) charArray[i];
+		
+		byte[] md5Bytes = md5.digest(byteArray);
+		
+		StringBuffer hexValue = new StringBuffer();
+		
+		for (int i = 0; i < md5Bytes.length; i++) {
+			
+			int val = ((int) md5Bytes[i]) & 0xff;
+			
+			if (val < 16)
+				
+				hexValue.append("0");
+			
+			hexValue.append(Integer.toHexString(val));
+			
+		}
+		
+		return hexValue.toString();
 
 	}
 

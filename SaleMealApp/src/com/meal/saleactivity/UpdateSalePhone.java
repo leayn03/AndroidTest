@@ -29,10 +29,11 @@ public class UpdateSalePhone extends BaseActivity {
 	ImageButton updateSalePhoneReturnButton;
     private SellerManageAction sellerManage=SellerManageAction.getInstance();  //	初始化实例
     Seller seller=SaleGlobal.seller; 
+    EditText phoneNum;
     
    private void addEventListener()
    {
-	   final EditText phoneNum=(EditText)findViewById(R.id.updateSalePhone);
+	   phoneNum=(EditText)findViewById(R.id.updateSalePhone);
 	   
 	   addClickEventListener(R.id.SaveUploadSalePhone,new View.OnClickListener() {
 		
@@ -66,11 +67,19 @@ public class UpdateSalePhone extends BaseActivity {
 		@Override
 		public void refresh(Message msg) {
 			// TODO Auto-generated method stub
-			
-			Toast.makeText(UpdateSalePhone.this, "电话号码修改成功", Toast.LENGTH_LONG).show();
-			Intent intent=new Intent();
-			intent.setClass(UpdateSalePhone.this,UpdateSaleInfo.class);
-			startActivity(intent);
+			if(0==msg.arg2)
+			{
+				Toast.makeText(UpdateSalePhone.this, "电话号码修改成功", Toast.LENGTH_LONG).show();
+				Intent intent=new Intent();
+				intent.setClass(UpdateSalePhone.this,UpdateSaleInfo.class);
+				startActivity(intent);
+			}
+			if(1==msg.arg2)
+			{
+				Toast.makeText(UpdateSalePhone.this, "电话号码修改失败，请重新输入！", Toast.LENGTH_LONG).show();
+				phoneNum.setText("");
+			}
+
 		}
 		   
 	   });
@@ -82,7 +91,17 @@ public class UpdateSalePhone extends BaseActivity {
 			// TODO Auto-generated method stub
 			
 			Message msg=Message.obtain();
-			msg.obj=sellerManage.updateSellerInfo(seller);
+			Boolean flag=false;
+			flag=sellerManage.updateSellerInfo(seller);
+			if(flag)
+			{
+				msg.arg2=0;
+			}
+			else
+			{
+				msg.arg2=1;
+			}
+
 			
 			finishAsynThread("updatesellerphone");
 			

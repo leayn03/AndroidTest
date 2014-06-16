@@ -2,6 +2,7 @@ package com.meal.saleactivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.Gravity;
@@ -110,6 +111,7 @@ public class UpdateSaleAddress extends BaseActivity {
 			 startActivity(intent);
 			 }
 		 });
+
 
 		initial();
 

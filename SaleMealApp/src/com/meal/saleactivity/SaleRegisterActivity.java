@@ -38,6 +38,7 @@ public class SaleRegisterActivity extends BaseActivity {
 	EditText registerPhone;
 	EditText registerName;
 	EditText registerAdd;
+	EditText registerCost;
 	EditText passwordFirst;
 	EditText passwordConfirm;
 	Button registerButton;
@@ -46,6 +47,7 @@ public class SaleRegisterActivity extends BaseActivity {
 		registerPhone = (EditText) findViewById(R.id.registerPhone);
 		registerName = (EditText) findViewById(R.id.registerName);
 		registerAdd = (EditText) findViewById(R.id.registerAddress);
+		registerCost = (EditText) findViewById(R.id.minCost);
 
 		passwordFirst = (EditText) findViewById(R.id.registerPassword);
 		passwordConfirm = (EditText) findViewById(R.id.registerConfirm);
@@ -63,6 +65,7 @@ public class SaleRegisterActivity extends BaseActivity {
 				final String phoneNum1 = registerPhone.getText().toString();
 				final String nameSale = registerName.getText().toString();
 				final String address = registerAdd.getText().toString();
+				final String minCost = registerCost.getText().toString();
 				final String password1 = passwordFirst.getText().toString();
 				final String password2 = passwordConfirm.getText().toString();
 				
@@ -76,10 +79,19 @@ public class SaleRegisterActivity extends BaseActivity {
 							 {
 //									 Toast.makeText(SaleRegisterActivity.this, "手机号码有效，两次密码输入相同!",
 //									 Toast.LENGTH_LONG).show();    //testToast
-									seller = new Seller(phoneNum1, password1, null, nameSale,
-											phoneNum1, address, null, 0);
+								 if(isRightPrice(minCost))
+								 {
+										seller = new Seller(phoneNum1, password1, null, nameSale,
+												phoneNum1, address, null, Double.valueOf(minCost));
 
-									startAsynThread("register");
+										startAsynThread("register");
+								 }
+								 else{
+									 Toast.makeText(SaleRegisterActivity.this, "起送价格输入有误，请重新输入！",
+									 Toast.LENGTH_LONG).show();
+								 }
+								 
+
 							 }
 							 else
 							 {
@@ -211,5 +223,54 @@ public class SaleRegisterActivity extends BaseActivity {
 		System.out.println(m.matches() + "---");
 		return m.matches();
 	}
+	private boolean isRightPrice(String price)//数字正确输入
+	{
+		boolean isRight = false;
+		int count=0;
+		int countDot=0;
 
+		if(price == null || price.equals("")) //输入不能为空
+		{
+			return isRight;
+		}
+
+		for(int i=0 ; i<price.length() ; i++)
+		{
+				char c = price.charAt(i);
+				if((c>='0' && c<='9') || c=='.')  //或者
+			{
+		
+			}
+			else
+			{
+				return isRight;
+			}
+		}
+		
+		for(int i=0 ; i<price.length() ; i++)
+		{
+			char c = price.charAt(i);
+
+			if(c=='.')
+			{
+				count=count+1;
+			}
+		}
+		for(int i=0 ; i<price.length() ; i++)
+		{
+			char c = price.charAt(i);
+			if(c=='.')
+			{
+				countDot=price.length()-i-1;
+			}
+		}
+		
+		if(count>1 || countDot>2)
+		{
+			return isRight;
+		}
+
+		isRight = true;
+		return isRight;
+	}
 }

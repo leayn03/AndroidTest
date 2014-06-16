@@ -248,6 +248,10 @@ public class SellerManageAction extends BaseAction {
 	public Seller login(final String sellerName, final String passWord) {
 
 		Seller seller = null;
+		
+		Global.seller = null;
+		
+		Global.token = null;
 
 		if (null != sellerName && null != passWord) {
 

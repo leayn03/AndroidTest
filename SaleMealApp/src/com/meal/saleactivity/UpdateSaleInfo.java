@@ -67,6 +67,8 @@ public class UpdateSaleInfo extends BaseActivity{
 
 	    }
 	    
+	    salePicture.setImageBitmap(bitmapPicture);
+	    
 	    showPictureEventListener(); //显示商家端图
 		closeEventListener();//退出登录同时把状态设置为false
 		

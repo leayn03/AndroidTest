@@ -1,5 +1,7 @@
 package com.meal.saleactivity;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -169,6 +171,8 @@ public class UpdateSalePicture extends BaseActivity{
 							path += "/";
 							Log.e("path", path);
 							Log.e("fileName", fileName);
+							
+							
 							tmp = sellerManage.uploadLogos(path, fileName);//传照片，获取照片uri
 							seller.setLogo(tmp);
 						    sellerManage.updateSellerInfo(seller);
@@ -185,25 +189,6 @@ public class UpdateSalePicture extends BaseActivity{
 		   });
 	   }
 	   
-//	    @Override  
-//	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
-//	        if (resultCode == RESULT_OK) {  
-//	        	uri = data.getData();  
-//	        	pictureUri=uri.toString();
-//	            Log.e("uri", pictureUri);  
-//	            ContentResolver cr = this.getContentResolver();  
-//	            try {  
-//	                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));  
-//	                ImageView imageView = (ImageView) findViewById(R.id.updateSalePicturePreview);  
-//	                /* 将Bitmap设定到ImageView */  
-//	                imageView.setImageBitmap(bitmap);  
-//	                flagP=true;
-//	            } catch (FileNotFoundException e) {  
-//	                Log.e("Exception", e.getMessage(),e);  
-//	            }  
-//	        }  
-//	        super.onActivityResult(requestCode, resultCode, data);  
-//	    } 
 
 	    @Override  
 	        protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
@@ -235,7 +220,6 @@ public class UpdateSalePicture extends BaseActivity{
 	                    Log.e("store",size +"");
 	                    if(size <= 1600000)
 	                    {
-	                   //  Bitmap tmp = PhotoUtil.toRoundCorner(bitmap, 180.0f);
 	                     ImageView imageView = (ImageView) findViewById(R.id.updateSalePicturePreview);  
 	                     imageView.setImageBitmap(bitmap);  
 	                     flagP = true;
@@ -244,6 +228,13 @@ public class UpdateSalePicture extends BaseActivity{
 	                    {
 	                     Toast.makeText(UpdateSalePicture.this , getResources().getString(R.string.failupdatebigfile), Toast.LENGTH_SHORT).show();
 	                    }
+	                    
+//	                    ImageView imageView = (ImageView)findViewById(R.id.updateSalePicturePreview);
+//	                    
+//	                    Bitmap compressBitmap = compressImage(bitmap);
+//	                    imageView.setImageBitmap(compressBitmap);  
+//	                    flagP = true;
+	                    
 	                } catch (FileNotFoundException e) {  
 	                    Log.e("Exception", e.getMessage(),e);  
 	                }  
@@ -281,4 +272,18 @@ public class UpdateSalePicture extends BaseActivity{
 	        return fileName; 
 	    }
 
+		private Bitmap compressImage(Bitmap image){
+			ByteArrayOutputStream baos=new ByteArrayOutputStream();
+			image.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+			int options = 100;
+			while(baos.toByteArray().length/1024 > 100){
+				options= options-10;
+				baos.reset();
+				image.compress(Bitmap.CompressFormat.JPEG, options, baos);
+			}
+				ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());
+				
+				Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);
+			return bitmap;
+		}
 }

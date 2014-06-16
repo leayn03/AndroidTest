@@ -61,7 +61,7 @@
 	              android:layout_marginRight="65dip"
                   android:layout_toRightOf="@id/salePictureText"
                   android:layout_gravity="center_vertical"
-                  android:src="@drawable/ic_launcher"
+                  android:src="@drawable/logo"
 
                   >
                                    

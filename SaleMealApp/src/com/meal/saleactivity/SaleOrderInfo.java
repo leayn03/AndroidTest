@@ -273,7 +273,7 @@ public class SaleOrderInfo extends BaseActivity{
 							            	break;
 							            }
 							        }
-							    	if(menuNum != key)
+							    	if(!menuNum.equals(key))
 						        	{
 						        		mapMenu.put(menuNum, 1);
 						        	}
@@ -297,7 +297,7 @@ public class SaleOrderInfo extends BaseActivity{
 
 								
 								orderDetailMap.put("saleUserName", "用户订单号:    "+tempOrder.getOid()+ "\n商品列表:\n"+menuResult);
-								orderDetailMap.put("saeUserTotal", "用户订单详情:    "+tempOrder.getAddress()+"  "+tempOrder.getPhone()+" \n订单时间:   "+tempOrder.getTime());
+								orderDetailMap.put("saeUserTotal", "用户订单详情:    "+tempOrder.getAddress()+"  "+tempOrder.getPhone()+" \n订单时间:  "+tempOrder.getTime());
 								orderDetailList.add(orderDetailMap);
 					    	}				
 						}

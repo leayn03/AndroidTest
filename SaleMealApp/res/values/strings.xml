@@ -46,4 +46,5 @@
     <string name="nonephoto">图片已损坏或不存在</string>
     <string name="uploadjpg">请上传jpg格式图片~</string>
     <string name="failupdatebigfile">文件大小不能超过1MB</string>
+    <string name="minCost">最低起送价</string>
 </resources>
